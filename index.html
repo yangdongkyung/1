@@ -61,7 +61,36 @@
       box-shadow: 1px 1px 0 #14110f;
     }
 
-    .tab-btn.active {
+    .source-card,
+    .city-news-card,
+    .pknu-info-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .source-card .link-btn,
+    .city-news-card .link-btn,
+    .pknu-info-card .link-btn {
+      margin-top: auto;
+      align-self: flex-start;
+    }
+
+    .source-card:nth-child(odd) .link-btn,
+    .city-news-card:nth-child(odd) .link-btn,
+    .pknu-info-card:nth-child(odd) .link-btn {
+      background: #ffd9c7;
+      color: #14110f;
+    }
+
+    .source-card:nth-child(even) .link-btn,
+    .city-news-card:nth-child(even) .link-btn,
+    .pknu-info-card:nth-child(even) .link-btn {
+      background: #ffffff;
+      color: #14110f;
+    }
+.tab-btn.active {
       background: #ef4926;
       color: white;
     }
@@ -93,7 +122,7 @@
       display: inline-flex;
       justify-content: flex-start;
       align-items: center;
-      gap: 0;
+      gap: 10px;
       padding: 22px 18px;
       background: #fffdf8;
       border: 3px solid #14110f;
@@ -123,7 +152,6 @@
       box-shadow: 3px 3px 0 #14110f;
       background: white;
       flex: 0 0 auto;
-      margin-left: 6px;
     }
 
     .search-panel, .panel {
@@ -586,6 +614,36 @@
       .source-grid, .stats-grid, .city-info-grid { grid-template-columns: 1fr; }
       .panel, .search-panel { padding: 23px; }
     }
+  
+    /* button-color-fix-start */
+    .chip-wrap .chip:nth-child(odd),
+    .source-row .link-btn:nth-child(odd),
+    .source-card:nth-child(odd) .link-btn,
+    .city-news-card:nth-child(odd) .link-btn,
+    .pknu-info-card:nth-child(odd) .link-btn {
+      background: #ffd9c7 !important;
+      color: #14110f !important;
+    }
+
+    .chip-wrap .chip:nth-child(even),
+    .source-row .link-btn:nth-child(even),
+    .source-card:nth-child(even) .link-btn,
+    .city-news-card:nth-child(even) .link-btn,
+    .pknu-info-card:nth-child(even) .link-btn {
+      background: #ffffff !important;
+      color: #14110f !important;
+    }
+
+    .chip-wrap .chip,
+    .source-row .link-btn,
+    .source-card .link-btn,
+    .city-news-card .link-btn,
+    .pknu-info-card .link-btn {
+      border: 3px solid #14110f !important;
+      box-shadow: 4px 4px 0 #14110f !important;
+    }
+    /* button-color-fix-end */
+
   </style>
 </head>
 <body>

@@ -261,15 +261,60 @@
     }
 
     .weather-icon {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      background: #00afc2;
+      width: 168px;
+      height: 168px;
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 30% 28%, rgba(255,255,255,.9), transparent 22%),
+        linear-gradient(145deg, #00afc2, #bff7fb);
       border: 5px solid #14110f;
       display: grid;
       place-items: center;
-      font-size: 62px;
+      font-size: 72px;
       box-shadow: 8px 8px 0 #ef4926;
+      position: relative;
+      overflow: hidden;
+    }
+.weather-icon.weather-sunny {
+      background:
+        radial-gradient(circle at 36% 30%, rgba(255,255,255,.9), transparent 20%),
+        linear-gradient(145deg, #ffd166, #fff4b8);
+      box-shadow: 8px 8px 0 #ef4926;
+    }
+
+    .weather-icon.weather-cloudy {
+      background:
+        radial-gradient(circle at 34% 28%, rgba(255,255,255,.95), transparent 23%),
+        linear-gradient(145deg, #b8c7d9, #f5f7fb);
+      box-shadow: 8px 8px 0 #7b8794;
+    }
+
+    .weather-icon.weather-rain {
+      background:
+        radial-gradient(circle at 35% 28%, rgba(255,255,255,.85), transparent 22%),
+        linear-gradient(145deg, #4da3ff, #d6ecff);
+      box-shadow: 8px 8px 0 #005bbb;
+    }
+
+    .weather-icon.weather-snow {
+      background:
+        radial-gradient(circle at 35% 28%, rgba(255,255,255,.95), transparent 22%),
+        linear-gradient(145deg, #dff6ff, #ffffff);
+      box-shadow: 8px 8px 0 #8ad7ff;
+    }
+
+    .weather-icon.weather-storm {
+      background:
+        radial-gradient(circle at 35% 28%, rgba(255,255,255,.8), transparent 20%),
+        linear-gradient(145deg, #333846, #a8b0c4);
+      box-shadow: 8px 8px 0 #ffbf00;
+    }
+
+    .weather-icon.weather-fog {
+      background:
+        radial-gradient(circle at 35% 28%, rgba(255,255,255,.9), transparent 22%),
+        linear-gradient(145deg, #d8d8d8, #ffffff);
+      box-shadow: 8px 8px 0 #9a9a9a;
     }
 
     .temp {
@@ -406,10 +451,6 @@
             <div class="temp" id="temp">--°C</div>
             <p class="weather-text" id="weatherDesc">부산 날씨를 불러오는 중입니다.</p>
             <p class="weather-text" id="weatherDetail">기온, 습도, 바람 정보를 표시합니다.</p>
-            <p class="small">
-              홈페이지 내 기본 날씨 표시는 부산 좌표 기준 실시간 API를 사용합니다.
-              더 정확한 예보·특보는 아래 기상청, 웨더아이 버튼으로 비교 확인하세요.
-            </p>
           </div>
         </div>
       </section>
@@ -424,14 +465,12 @@
             <h3>기상청 날씨누리</h3>
             <p>공식 예보, 특보, 단기예보, 중기예보를 확인하기 좋습니다. 부산뿐 아니라 전국 각 지역의 공신력 있는 예보를 볼 수 있습니다.</p>
             <a class="link-btn danger" href="https://www.weather.go.kr/w/forecast/overall/short-term.do?stnId=159" target="_blank" rel="noopener">부산·울산·경남 예보</a>
-            <p class="small">타 지역이 궁금하면 기상청 날씨누리에서 지역을 바꿔 확인하세요.</p>
           </article>
 
           <article class="source-card">
             <h3>웨더아이</h3>
             <p>지역별 날씨, 생활지수, 기온·강수·풍속 정보를 보기 좋습니다. 일반 사용자가 빠르게 날씨 흐름을 파악할 때 유용합니다.</p>
             <a class="link-btn" href="https://www.weatheri.co.kr/forecast/forecast01.php?a_name=%EB%B6%80%EC%82%B0&k=9&rid=1101010100" target="_blank" rel="noopener">웨더아이 부산</a>
-            <p class="small">상단 메뉴에서 지역을 바꾸면 타 지역 예보도 확인할 수 있습니다.</p>
           </article>
         </div>
       </section>
@@ -569,21 +608,39 @@ function getWeatherText(code) {
       const icon = document.getElementById("weatherIcon");
 
       try {
-        const url = "https://api.open-meteo.com/v1/forecast?latitude=35.1796&longitude=129.0756&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code&timezone=Asia%2FSeoul";
+        const url = "https://api.open-meteo.com/v1/forecast?latitude=35.1796&longitude=129.0756&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code,precipitation,rain,showers&timezone=Asia%2FSeoul";
         const res = await fetch(url);
         const data = await res.json();
         const now = data.current;
-        const [text, emoji] = getWeatherText(now.weather_code);
+        const [text, emoji, weatherClass] = getWeatherText(now.weather_code);
 
-        temp.textContent = Math.round(now.temperature_2m) + "°C";
-        desc.textContent = `부산 현재 날씨: ${text}`;
-        detail.textContent = `체감 ${Math.round(now.apparent_temperature)}°C · 습도 ${now.relative_humidity_2m}% · 바람 ${now.wind_speed_10m}km/h`;
+        const temperature = Number(now.temperature_2m);
+        const apparent = Number(now.apparent_temperature);
+        const humidity = Number(now.relative_humidity_2m);
+        const wind = Number(now.wind_speed_10m);
+        const precipitation = Number(now.precipitation ?? 0);
+        const rain = Number(now.rain ?? 0);
+        const showers = Number(now.showers ?? 0);
+        const totalRain = Math.max(precipitation, rain, showers);
+
+        temp.textContent = Number.isFinite(temperature) ? `${Math.round(temperature)}°C` : "--°C";
+        desc.textContent = text;
+
+        const details = [];
+        if (Number.isFinite(apparent)) details.push(`체감 ${Math.round(apparent)}°C`);
+        if (Number.isFinite(humidity)) details.push(`습도 ${humidity}%`);
+        if (Number.isFinite(wind)) details.push(`바람 ${wind}km/h`);
+        if (Number.isFinite(totalRain) && totalRain > 0) details.push(`강수량 ${totalRain}mm`);
+
+        detail.textContent = details.length ? details.join(" · ") : "기상청·웨더아이 버튼으로 자세한 날씨를 확인하세요.";
         icon.textContent = emoji;
+        icon.className = `weather-icon ${weatherClass || "weather-cloudy"}`;
       } catch (e) {
         temp.textContent = "부산";
         desc.textContent = "날씨 정보를 불러오지 못했습니다.";
         detail.textContent = "기상청·웨더아이 버튼으로 직접 확인하세요.";
         icon.textContent = "🌊";
+        icon.className = "weather-icon";
       }
     }
 

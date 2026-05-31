@@ -94,12 +94,13 @@
       justify-content: flex-start;
       align-items: center;
       gap: 0;
-      padding: 14px 16px;
+      padding: 22px 18px;
       background: #fffdf8;
       border: 3px solid #14110f;
       border-radius: 20px;
       box-shadow: 4px 4px 0 rgba(20,17,15,.18);
       margin-bottom: 48px;
+      min-height: 102px;
       max-width: fit-content;
     }
 
@@ -496,7 +497,11 @@
       }
     }
 
-    function switchTab(tabName) {
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+
+    function switchTab(tabName, save = true) {
       document.querySelectorAll(".tab-btn").forEach(btn => {
         btn.classList.toggle("active", btn.dataset.tab === tabName);
       });
@@ -505,7 +510,9 @@
         panel.classList.toggle("active", panel.id === "tab-" + tabName);
       });
 
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (save) {
+        localStorage.setItem("activeHomepageTab", tabName);
+      }
     }
 
     document.querySelectorAll(".tab-btn").forEach(btn => {
@@ -516,6 +523,13 @@
     renderButtons("pknuNews", PKNU_KEYWORDS);
     renderStats();
     loadWeather();
+
+    const savedTab = localStorage.getItem("activeHomepageTab") || "home";
+    switchTab(savedTab, false);
+
+    window.addEventListener("load", () => {
+      window.scrollTo(0, 0);
+    });
   </script>
 </body>
 </html>

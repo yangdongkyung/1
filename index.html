@@ -1,1 +1,413 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>양동경의 레트로 부산 홈페이지</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
+      background:
+        linear-gradient(135deg, rgba(239, 73, 38, .13), transparent 28%),
+        linear-gradient(315deg, rgba(0, 175, 194, .17), transparent 35%),
+        #fff8ef;
+      color: #211611;
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px min(6vw, 76px);
+      background: rgba(255, 248, 239, .86);
+      backdrop-filter: blur(14px);
+      border-bottom: 3px solid #211611;
+    }
+    .brand {
+      font-weight: 1000;
+      letter-spacing: -1px;
+      color: #ef4926;
+      font-size: 22px;
+    }
+    .topbar button {
+      border: 2px solid #211611;
+      background: white;
+      padding: 9px 12px;
+      border-radius: 14px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 #211611;
+      margin-left: 6px;
+    }
+    .hero {
+      min-height: 92vh;
+      padding: 70px min(6vw, 76px);
+      display: grid;
+      grid-template-columns: 1fr .92fr;
+      gap: 34px;
+      align-items: center;
+    }
+    .retro-mark {
+      width: min(78vw, 430px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at center, #fff8ef 0 28%, transparent 29%),
+        linear-gradient(#ef4926 0 50%, #101010 51% 100%);
+      border: 8px solid #211611;
+      display: grid;
+      place-items: center;
+      transform: rotate(-4deg);
+      box-shadow: 18px 18px 0 rgba(0,0,0,.14);
+      position: relative;
+      overflow: hidden;
+    }
+    .retro-mark::before {
+      content: "";
+      position: absolute;
+      inset: 22%;
+      background: #00afc2;
+      border-radius: 50%;
+      opacity: .95;
+    }
+    .retro-mark::after {
+      content: "BUSAN";
+      position: absolute;
+      top: 13%;
+      font-size: 31px;
+      letter-spacing: 12px;
+      color: white;
+      font-weight: 1000;
+    }
+    .retro-word {
+      position: relative;
+      z-index: 2;
+      font-size: clamp(62px, 9vw, 116px);
+      font-weight: 1000;
+      font-style: italic;
+      letter-spacing: -7px;
+      color: #ef4926;
+      text-shadow:
+        4px 4px 0 #211611,
+        8px 8px 0 rgba(255,255,255,.9);
+    }
+    .kicker {
+      display: inline-block;
+      background: #211611;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 1000;
+      letter-spacing: 1px;
+    }
+    h1 {
+      margin: 24px 0 18px;
+      font-size: clamp(48px, 7vw, 96px);
+      line-height: .92;
+      letter-spacing: -5px;
+    }
+    h1 span {
+      color: #ef4926;
+      text-shadow: 3px 3px 0 #211611;
+    }
+    .lead {
+      font-size: 19px;
+      line-height: 1.72;
+      max-width: 650px;
+      color: #4b332a;
+    }
+    .cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+    .cta button, .chip {
+      border: 3px solid #211611;
+      background: white;
+      color: #211611;
+      padding: 13px 16px;
+      border-radius: 16px;
+      font-weight: 1000;
+      cursor: pointer;
+      box-shadow: 5px 5px 0 #211611;
+      transition: .15s;
+    }
+    .cta button:nth-child(2n), .chip:nth-child(2n) {
+      background: #00afc2;
+    }
+    .cta button:nth-child(3n), .chip:nth-child(3n) {
+      background: #ef4926;
+      color: white;
+    }
+    .cta button:hover, .chip:hover {
+      transform: translate(3px, 3px);
+      box-shadow: 2px 2px 0 #211611;
+    }
+    main {
+      padding: 0 min(6vw, 76px) 90px;
+    }
+    .panel {
+      margin: 32px 0;
+      border: 4px solid #211611;
+      border-radius: 30px;
+      background: #fffdf8;
+      padding: 30px;
+      box-shadow: 10px 10px 0 #211611;
+    }
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 4px solid #211611;
+      padding-bottom: 14px;
+      margin-bottom: 22px;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 48px);
+      letter-spacing: -2px;
+    }
+    .label {
+      background: #ef4926;
+      color: white;
+      border: 3px solid #211611;
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-weight: 1000;
+      transform: rotate(2deg);
+    }
+    .weather {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .sun {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: #ef4926;
+      border: 5px solid #211611;
+      display: grid;
+      place-items: center;
+      font-size: 52px;
+      box-shadow: 8px 8px 0 #00afc2;
+    }
+    .temp {
+      font-size: clamp(62px, 10vw, 118px);
+      font-weight: 1000;
+      letter-spacing: -6px;
+      color: #ef4926;
+      text-shadow: 3px 3px 0 #211611;
+    }
+    .weather p {
+      margin: 6px 0;
+      font-size: 18px;
+      color: #4b332a;
+    }
+    .chip-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .stat-card {
+      background: #fff8ef;
+      border: 3px solid #211611;
+      border-radius: 24px;
+      padding: 20px;
+      min-height: 220px;
+      box-shadow: 6px 6px 0 rgba(33,22,17,.22);
+    }
+    .stat-icon {
+      width: 54px;
+      height: 54px;
+      border: 3px solid #211611;
+      border-radius: 17px;
+      background: #00afc2;
+      display: grid;
+      place-items: center;
+      font-size: 25px;
+      margin-bottom: 14px;
+    }
+    .stat-card h3 {
+      margin: 0 0 9px;
+      font-size: 23px;
+      color: #ef4926;
+    }
+    .stat-card p {
+      margin: 0;
+      line-height: 1.62;
+      color: #4b332a;
+    }
+    footer {
+      padding: 36px;
+      text-align: center;
+      font-weight: 800;
+      color: #4b332a;
+    }
+    @media (max-width: 920px) {
+      .hero { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .topbar { overflow-x: auto; }
+    }
+    @media (max-width: 560px) {
+      .stats { grid-template-columns: 1fr; }
+      .weather { grid-template-columns: 1fr; }
+      .topbar nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">BUSAN GIANTS PAGE</div>
+    <nav>
+      <button onclick="scrollToSection('weather')">날씨</button>
+      <button onclick="scrollToSection('issue')">부산</button>
+      <button onclick="scrollToSection('pknu')">부경대</button>
+      <button onclick="scrollToSection('welfare')">복지</button>
+    </nav>
+  </div>
 
+  <header class="hero">
+    <div>
+      <span class="kicker">RETRO BASEBALL · BUSAN STYLE</span>
+      <h1>YANG'S<br><span>HOMEPAGE</span></h1>
+      <p class="lead">
+        부산을 중심으로 날씨, 지역 이슈, 부경대 뉴스, 사회복지 통계를 모아보는 레트로 감성 홈페이지입니다.
+        주황, 청록, 검정 라인을 활용해 오래된 야구 엠블럼 느낌으로 구성했습니다.
+      </p>
+      <div class="cta">
+        <button onclick="scrollToSection('weather')">오늘 날씨 보기</button>
+        <button onclick="scrollToSection('issue')">부산 이슈 검색</button>
+        <button onclick="scrollToSection('welfare')">복지 통계 보기</button>
+      </div>
+    </div>
+    <div class="retro-mark">
+      <div class="retro-word">Giants</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel" id="weather">
+      <div class="panel-head">
+        <h2>날씨</h2>
+        <span class="label">BUSAN LIVE</span>
+      </div>
+      <div class="weather">
+        <div class="sun">☀️</div>
+        <div>
+          <div class="temp" id="temp">--°C</div>
+          <p id="weatherDesc">부산 날씨 불러오는 중</p>
+          <p id="weatherDetail">Open-Meteo API 기준</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="issue">
+      <div class="panel-head">
+        <h2>부산의 이슈</h2>
+        <span class="label">SEARCH</span>
+      </div>
+      <p>키워드를 누르면 부산 관련 이슈를 바로 검색합니다.</p>
+      <div class="chip-wrap" id="busanIssues"></div>
+    </section>
+
+    <section class="panel" id="pknu">
+      <div class="panel-head">
+        <h2>부경대 관련 뉴스</h2>
+        <span class="label">PKNU</span>
+      </div>
+      <p>부경대학교 관련 주요 검색어를 버튼으로 정리했습니다.</p>
+      <div class="chip-wrap" id="pknuNews"></div>
+    </section>
+
+    <section class="panel" id="welfare">
+      <div class="panel-head">
+        <h2>사회복지 관련 통계</h2>
+        <span class="label">WELFARE</span>
+      </div>
+      <div class="stats" id="statsGrid"></div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Yang Donggyeong · Single file for GitHub Pages
+  </footer>
+  
+<script>
+  const ISSUE_KEYWORDS = ["부산 엑스포 이후", "부산 청년", "부산 교통", "부산 복지", "부산 관광"];
+  const PKNU_KEYWORDS = ["부경대학교 뉴스", "국립부경대학교", "부경대 산학협력", "부경대 입학", "부경대 연구"];
+  const STAT_ITEMS = [
+    { label: "고령화", value: "부산은 고령 인구 비중이 높은 대도시로 노인복지 수요가 큽니다.", icon: "👵" },
+    { label: "1인 가구", value: "청년·중장년·노년 1인 가구의 고립과 돌봄 문제가 사회복지 이슈로 이어집니다.", icon: "🏠" },
+    { label: "장애인 복지", value: "이동권, 지역사회 자립, 돌봄서비스 접근성이 핵심 지표입니다.", icon: "♿" },
+    { label: "아동·청소년", value: "정서지원, 학교사회복지, 디지털 격차, 건강증진이 주요 과제입니다.", icon: "🧒" }
+  ];
+
+  function openSearch(query) {
+    window.open("https://search.naver.com/search.naver?query=" + encodeURIComponent(query), "_blank");
+  }
+
+  function renderButtons(id, list) {
+    const box = document.getElementById(id);
+    box.innerHTML = list.map(q => `<button class="chip" onclick="openSearch('${q}')">${q}</button>`).join("");
+  }
+
+  function renderStats() {
+    const box = document.getElementById("statsGrid");
+    box.innerHTML = STAT_ITEMS.map(item => `
+      <article class="stat-card">
+        <div class="stat-icon">${item.icon}</div>
+        <div>
+          <h3>${item.label}</h3>
+          <p>${item.value}</p>
+        </div>
+      </article>
+    `).join("");
+  }
+
+  async function loadWeather() {
+    const temp = document.getElementById("temp");
+    const desc = document.getElementById("weatherDesc");
+    const detail = document.getElementById("weatherDetail");
+
+    try {
+      const url = "https://api.open-meteo.com/v1/forecast?latitude=35.1796&longitude=129.0756&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&timezone=Asia%2FSeoul";
+      const res = await fetch(url);
+      const data = await res.json();
+      const now = data.current;
+
+      temp.textContent = Math.round(now.temperature_2m) + "°C";
+      desc.textContent = "부산 현재 날씨";
+      detail.textContent = `습도 ${now.relative_humidity_2m}% · 바람 ${now.wind_speed_10m}km/h`;
+    } catch (e) {
+      temp.textContent = "부산";
+      desc.textContent = "날씨 정보를 불러오지 못했습니다.";
+      detail.textContent = "인터넷 연결 또는 API 접근 상태를 확인하세요.";
+    }
+  }
+
+  function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+  }
+
+  renderButtons("busanIssues", ISSUE_KEYWORDS);
+  renderButtons("pknuNews", PKNU_KEYWORDS);
+  renderStats();
+  loadWeather();
+</script>
+
+</body>
+</html>

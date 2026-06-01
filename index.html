@@ -812,6 +812,74 @@
     }
     /* button-color-fix-end */
 
+
+    /* baseball-section-cleanup-start */
+    .baseball-panel {
+      overflow: hidden;
+    }
+
+    .baseball-extra-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .baseball-link-panel {
+      border: 3px solid #14110f;
+      border-radius: 34px;
+      background: #fffdf8;
+      padding: 28px;
+      box-shadow: 8px 8px 0 rgba(20,17,15,.16);
+      overflow: hidden;
+    }
+
+    .baseball-link-panel:nth-child(odd) {
+      background: #ffd9c7;
+    }
+
+    .baseball-link-panel:nth-child(even) {
+      background: #e9fbfd;
+    }
+
+    .baseball-link-panel h3 {
+      margin: 0 0 12px;
+      font-size: 30px;
+      letter-spacing: -1px;
+    }
+
+    .baseball-link-panel p {
+      margin: 0 0 18px;
+      color: #4b332a;
+      line-height: 1.65;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .baseball-link-panel .link-btn {
+      background: #ffffff;
+      color: #14110f;
+    }
+
+    #tab-baseball img {
+      max-width: 100%;
+      display: block;
+    }
+
+    #tab-baseball .stadium-photo-card,
+    #tab-baseball .changwon-photo-card {
+      overflow: hidden;
+    }
+
+    @media (max-width: 780px) {
+      .baseball-board-grid,
+      .stadium-sub-grid,
+      .baseball-extra-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    /* baseball-section-cleanup-end */
+
   </style>
 </head>
 <body>
@@ -1202,6 +1270,21 @@
           </article>
         </div>
       </section>
+
+      <div class="baseball-extra-grid">
+        <section class="baseball-link-panel">
+          <h3>KBO</h3>
+          <p>야구장 칸과 분리한 KBO 전용 칸입니다. 공식 일정, 기록, 순위 정보를 따로 확인할 수 있습니다.</p>
+          <a class="link-btn" href="https://www.koreabaseball.com/" target="_blank" rel="noopener">KBO 공식 홈페이지</a>
+        </section>
+
+        <section class="baseball-link-panel">
+          <h3>롯데자이언츠</h3>
+          <p>야구장 사진 영역과 분리한 롯데자이언츠 전용 칸입니다. 칸 밖으로 사진이 삐져나오지 않도록 overflow 처리를 보강했습니다.</p>
+          <a class="link-btn" href="https://www.giantsclub.com/" target="_blank" rel="noopener">롯데자이언츠 공식 홈페이지</a>
+        </section>
+      </div>
+
     </section>
   </main>
 <script>

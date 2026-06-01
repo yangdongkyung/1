@@ -884,41 +884,73 @@
 
   
 
-/* baseball-clean-v3-start */
+/* baseball-clean-v4-original-ratio-start */
 #tab-baseball .baseball-panel,
 #tab-baseball .baseball-board,
 #tab-baseball .stadium-detail,
 #tab-baseball .baseball-link-panel {
   overflow: hidden !important;
 }
-#tab-baseball .baseball-board { display: none !important; }
-#tab-baseball .baseball-board.active { display: block !important; }
-#tab-baseball .stadium-detail { display: none !important; }
-#tab-baseball .stadium-detail.active { display: block !important; }
-#tab-baseball .stadium-photo-grid {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
-  gap: 18px !important;
-  column-count: initial !important;
-  margin-top: 22px !important;
+
+#tab-baseball .baseball-board { 
+  display: none !important;
+  padding: 20px !important;
 }
+#tab-baseball .baseball-board.active { display: block !important; }
+
+#tab-baseball .stadium-detail { 
+  display: none !important;
+  padding: 16px !important;
+}
+#tab-baseball .stadium-detail.active { display: block !important; }
+
+#tab-baseball .stadium-photo-grid,
+#tab-baseball .changwon-photo-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  gap: 10px !important;
+  column-count: initial !important;
+  column-gap: 0 !important;
+  margin-top: 14px !important;
+}
+
 #tab-baseball .stadium-photo-card,
 #tab-baseball .changwon-photo-card {
-  display: block !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   width: 100% !important;
   margin: 0 !important;
+  padding: 6px !important;
   overflow: hidden !important;
   line-height: 0 !important;
+  border-radius: 18px !important;
 }
+
 #tab-baseball .stadium-photo-card img,
 #tab-baseball .changwon-photo-card img {
   width: 100% !important;
   height: auto !important;
   max-width: 100% !important;
   object-fit: contain !important;
+  object-position: center center !important;
   display: block !important;
+  border-radius: 12px !important;
 }
-/* baseball-clean-v3-end */
+
+@media (max-width: 720px) {
+  #tab-baseball .baseball-board,
+  #tab-baseball .stadium-detail {
+    padding: 12px !important;
+  }
+
+  #tab-baseball .stadium-photo-grid,
+  #tab-baseball .changwon-photo-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+}
+/* baseball-clean-v4-original-ratio-end */
 </style>
 </head>
 <!-- optimized_for_size: max_side=900 quality=50 -->

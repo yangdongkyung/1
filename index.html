@@ -1719,10 +1719,12 @@ function getWeatherText(code) {
         if (clicked) clicked.classList.add("active");
 
         if (city === "seoul") {
-          toggleSeoulStadium("gocheok");
+          document.querySelectorAll("#baseball-seoul .stadium-detail").forEach(detail => detail.classList.remove("active"));
+          document.querySelectorAll("#baseball-seoul .stadium-sub-btn").forEach(btn => btn.classList.remove("active"));
         }
         if (city === "daejeon") {
-          toggleDaejeonStadium("old");
+          document.querySelectorAll("#baseball-daejeon .stadium-detail").forEach(detail => detail.classList.remove("active"));
+          document.querySelectorAll("#baseball-daejeon .stadium-sub-btn").forEach(btn => btn.classList.remove("active"));
         }
       }
     }

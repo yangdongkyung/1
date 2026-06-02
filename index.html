@@ -3,6 +3,9 @@
 
 <html lang="ko">
 <head>
+<script>
+  document.documentElement.classList.add("tabs-booting");
+</script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>양동경 홈페이지</title>
@@ -13,15 +16,24 @@
       margin: 0;
       font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
       background:
-        radial-gradient(circle at 18% 8%, rgba(239, 73, 38, .16), transparent 24%),
-        radial-gradient(circle at 78% 20%, rgba(0, 175, 194, .18), transparent 26%),
-        #fff8ef;
+        radial-gradient(circle at 16% 8%, rgba(190, 42, 77, .09), transparent 24%),
+        radial-gradient(circle at 84% 14%, rgba(31, 60, 102, .08), transparent 28%),
+        linear-gradient(180deg, rgba(255, 251, 249, .98), rgba(250, 246, 243, .98)),
+        #fbf7f4;
       color: #14110f;
       visibility: hidden;
     }
 
     body.tabs-ready {
       visibility: visible;
+    }
+
+    html.tabs-booting body {
+      opacity: 0;
+    }
+
+    html:not(.tabs-booting) body.tabs-ready {
+      opacity: 1;
     }
 
     .topbar {
@@ -36,6 +48,12 @@
       background: rgba(255, 248, 239, .92);
       backdrop-filter: blur(14px);
       border-bottom: 3px solid #14110f;
+    }
+
+    .topbar,
+    .page {
+      position: relative;
+      z-index: 1;
     }
 
     .tab-nav {
@@ -338,6 +356,29 @@
       background: #fffdf8;
       padding: 32px 34px;
       box-shadow: 8px 8px 0 rgba(20,17,15,.16);
+    }
+
+    .assignment-note {
+      margin-top: 18px;
+      border: 2px solid #14110f;
+      border-radius: 24px;
+      padding: 24px;
+      background: linear-gradient(180deg, #fffdfb, #fff8f3);
+      box-shadow: 4px 4px 0 rgba(20,17,15,.14);
+    }
+
+    .assignment-note h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      letter-spacing: -1px;
+      color: #16365f;
+    }
+
+    .assignment-note p {
+      margin: 0;
+      line-height: 1.72;
+      color: #4b332a;
+      font-size: 17px;
     }
 
     .search-panel h2, h2 {
@@ -1094,16 +1135,17 @@
 <body>
 <header class="topbar">
 <nav aria-label="홈페이지 메뉴" class="tab-nav">
-<button class="tab-btn active" data-tab="home">홈</button>
+<button class="tab-btn" data-tab="home">홈</button>
 <button class="tab-btn" data-tab="weather">날씨</button>
 <button class="tab-btn" data-tab="issue">부산 이슈</button>
 <button class="tab-btn" data-tab="pknu">부경대 뉴스</button>
 <button class="tab-btn" data-tab="welfare">통계</button>
 <button class="tab-btn" data-tab="baseball">야구</button>
+<button class="tab-btn" data-tab="assignment">과제</button>
 </nav>
 </header>
 <main class="page">
-<section class="tab-panel active" id="tab-home">
+<section class="tab-panel" id="tab-home">
 <div class="home-hero">
 <div>
 <h1>양동경 홈페이지</h1>
@@ -1652,6 +1694,14 @@
 </section>
 </div>
 </section>
+<section class="tab-panel" id="tab-assignment">
+<section class="panel">
+<div class="panel-head">
+<h2>과제</h2>
+<span class="label">TASK</span>
+</div>
+</section>
+</section>
 </main>
 <script>
     const ISSUE_KEYWORDS = ["부산 지역 이슈", "부산 청년 정책", "부산 교통 뉴스", "부산 복지", "부산 관광"];
@@ -1825,6 +1875,7 @@ function getWeatherText(code) {
     const savedTab = localStorage.getItem("activeHomepageTab") || "home";
     switchTab(savedTab, false);
     document.body.classList.add("tabs-ready");
+    document.documentElement.classList.remove("tabs-booting");
 
     renderButtons("busanIssues", ISSUE_KEYWORDS);
     renderButtons("pknuNews", PKNU_KEYWORDS);
@@ -1847,5 +1898,8 @@ function getWeatherText(code) {
 
 <!-- HOME_HERO_REBUILT_20260602: rebuilt home title card with taller vertical ratio and updated profile photo -->
 <!-- HOME_PHOTO_SIDE_FIX_20260602: moved profile photo beside title and reduced photo size -->
+<!-- ASSIGNMENT_TAB_SOFT_LOTTE_BG_20260602: added assignment tab and subtle Lotte Giants logo color background -->
+<!-- NO_HOME_LOGO_REFRESH_FIX_20260602: removed Lotte logo overlay and prevented home-tab flash on refresh -->
+<!-- ASSIGNMENT_PLACEHOLDER_REMOVED_20260602: removed default assignment note box only -->
 </body>
 </html>

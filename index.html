@@ -1872,7 +1872,18 @@ function getWeatherText(code) {
       btn.addEventListener("click", () => switchTab(btn.dataset.tab));
     });
 
-    const savedTab = sessionStorage.getItem("activeHomepageTab") || "home";
+    localStorage.removeItem("activeHomepageTab");
+
+    const navigationEntry = performance.getEntriesByType("navigation")[0];
+    const navigationType = navigationEntry ? navigationEntry.type : "navigate";
+    const savedTab = navigationType === "reload"
+      ? (sessionStorage.getItem("activeHomepageTab") || "home")
+      : "home";
+
+    if (navigationType !== "reload") {
+      sessionStorage.removeItem("activeHomepageTab");
+    }
+
     switchTab(savedTab, false);
     document.body.classList.add("tabs-ready");
     document.documentElement.classList.remove("tabs-booting");
@@ -1902,5 +1913,6 @@ function getWeatherText(code) {
 <!-- NO_HOME_LOGO_REFRESH_FIX_20260602: removed Lotte logo overlay and prevented home-tab flash on refresh -->
 <!-- ASSIGNMENT_PLACEHOLDER_REMOVED_20260602: removed default assignment note box only -->
 <!-- START_HOME_NEW_WINDOW_FIX_20260602: session tab restore only; new browser window starts from home -->
+<!-- HOME_ON_REOPEN_FIX_20260602: only reload restores current tab; reopening starts from home -->
 </body>
 </html>

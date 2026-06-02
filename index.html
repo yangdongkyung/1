@@ -881,6 +881,19 @@
       text-align: center;
     }
 
+    .lotte-button-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .lotte-button-grid .link-btn {
+      width: 100%;
+      min-height: 54px;
+      text-align: center;
+    }
+
     #tab-baseball img {
       max-width: 100%;
       display: block;
@@ -895,7 +908,8 @@
       .baseball-board-grid,
       .stadium-sub-grid,
       .baseball-extra-grid,
-      .kbo-button-grid {
+      .kbo-button-grid,
+      .lotte-button-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -1595,8 +1609,10 @@
 </section>
 <section class="baseball-link-panel">
 <h3>롯데자이언츠</h3>
-<p>야구장 사진 영역과 분리한 롯데자이언츠 전용 칸입니다.</p>
-<a class="link-btn" href="https://www.giantsclub.com/" rel="noopener" target="_blank">롯데자이언츠 바로가기</a>
+<div class="lotte-button-grid">
+<a class="link-btn" href="https://www.youtube.com/@giantstv" rel="noopener" target="_blank">유튜브</a>
+<a class="link-btn" href="https://www.instagram.com/busanlottegiants/" rel="noopener" target="_blank">인스타그램</a>
+</div>
 </section>
 </div>
 </section>
@@ -1787,5 +1803,6 @@ function getWeatherText(code) {
 <!-- FINAL_CHECK_20260601: INCHEON=8 DAEGU=6 GWANGJU=9 GOCHEOK=9 -->
 <!-- REFRESH_FLASH_FIX_20260602: saved tab applied before page reveal -->
 <!-- KBO_BUTTONS_FIX_20260602: schedule-rank-record-transfer buttons only -->
+<!-- LOTTE_BUTTONS_FIX_20260602: youtube-instagram buttons only -->
 </body>
 </html>

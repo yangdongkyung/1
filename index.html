@@ -902,6 +902,13 @@
       width: 100%;
       min-height: 54px;
       text-align: center;
+      margin-top: 0;
+    }
+
+    .ticket-button-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
       margin-top: 12px;
     }
 
@@ -920,7 +927,8 @@
       .stadium-sub-grid,
       .baseball-extra-grid,
       .kbo-button-grid,
-      .lotte-button-grid {
+      .lotte-button-grid,
+      .ticket-button-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -1627,7 +1635,13 @@
 </section>
 <section class="baseball-link-panel ticket-link-panel">
 <h3>예매</h3>
-<a class="link-btn" href="https://www.giantsclub.com/html/?pcode=378" rel="noopener" target="_blank">예매</a>
+<div class="ticket-button-grid">
+<a class="link-btn" href="https://ticket.giantsclub.com/loginForm.do" rel="noopener" target="_blank">롯데자이언츠</a>
+<a class="link-btn" href="https://www.ncdinos.com/auth/ticket.do" rel="noopener" target="_blank">NC Dinos</a>
+<a class="link-btn" href="https://ticket.ssg.com/ticket" rel="noopener" target="_blank">SSG 랜더스</a>
+<a class="link-btn" href="https://www.ticketlink.co.kr/home" rel="noopener" target="_blank">티켓링크</a>
+<a class="link-btn" href="https://ticket.interpark.com/Contents/Sports" rel="noopener" target="_blank">인터파크</a>
+</div>
 </section>
 </div>
 </section>
@@ -1820,5 +1834,6 @@ function getWeatherText(code) {
 <!-- KBO_BUTTONS_FIX_20260602: schedule-rank-record-transfer buttons only -->
 <!-- LOTTE_BUTTONS_FIX_20260602: youtube-instagram buttons only -->
 <!-- TICKET_PANEL_FIX_20260602: added independent ticket panel below KBO and Lotte -->
+<!-- TICKET_BUTTONS_FIX_20260602: lotte-nc-ssg-ticketlink-interpark -->
 </body>
 </html>

@@ -17,6 +17,11 @@
         radial-gradient(circle at 78% 20%, rgba(0, 175, 194, .18), transparent 26%),
         #fff8ef;
       color: #14110f;
+      visibility: hidden;
+    }
+
+    body.tabs-ready {
+      visibility: visible;
     }
 
     .topbar {
@@ -1747,13 +1752,14 @@ function getWeatherText(code) {
       btn.addEventListener("click", () => switchTab(btn.dataset.tab));
     });
 
+    const savedTab = localStorage.getItem("activeHomepageTab") || "home";
+    switchTab(savedTab, false);
+    document.body.classList.add("tabs-ready");
+
     renderButtons("busanIssues", ISSUE_KEYWORDS);
     renderButtons("pknuNews", PKNU_KEYWORDS);
     renderStats();
     loadWeather();
-
-    const savedTab = localStorage.getItem("activeHomepageTab") || "home";
-    switchTab(savedTab, false);
 
     window.addEventListener("load", () => {
       window.scrollTo(0, 0);
@@ -1761,5 +1767,6 @@ function getWeatherText(code) {
   </script>
 <!-- verified-photo-sections: incheon=8 daegu=6 gwangju=9 gocheok=9 jamsil=8 suwon=7 busan=7; refreshed=2026-06-01 -->
 <!-- FINAL_CHECK_20260601: INCHEON=8 DAEGU=6 GWANGJU=9 GOCHEOK=9 -->
+<!-- REFRESH_FLASH_FIX_20260602: saved tab applied before page reveal -->
 </body>
 </html>

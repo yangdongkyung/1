@@ -828,8 +828,9 @@
     .baseball-extra-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-      margin-top: 28px;
+      column-gap: 18px;
+      row-gap: 34px;
+      margin-top: 34px;
     }
 
     .baseball-link-panel {
@@ -847,6 +848,10 @@
 
     .baseball-link-panel:nth-child(even) {
       background: #e9fbfd;
+    }
+
+    .baseball-extra-grid > .baseball-link-panel:not(.ticket-link-panel) {
+      min-height: 190px;
     }
 
     .baseball-link-panel h3 {
@@ -885,7 +890,7 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
-      margin-top: 12px;
+      margin-top: 40px;
     }
 
     .lotte-button-grid .link-btn {
@@ -1835,5 +1840,6 @@ function getWeatherText(code) {
 <!-- LOTTE_BUTTONS_FIX_20260602: youtube-instagram buttons only -->
 <!-- TICKET_PANEL_FIX_20260602: added independent ticket panel below KBO and Lotte -->
 <!-- TICKET_BUTTONS_FIX_20260602: lotte-nc-ssg-ticketlink-interpark -->
+<!-- BASEBALL_EXTRA_SPACING_FIX_20260602: matched KBO/Lotte-to-ticket spacing and lowered Lotte buttons -->
 </body>
 </html>

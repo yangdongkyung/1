@@ -1864,7 +1864,7 @@ function getWeatherText(code) {
       });
 
       if (save) {
-        localStorage.setItem("activeHomepageTab", tabName);
+        sessionStorage.setItem("activeHomepageTab", tabName);
       }
     }
 
@@ -1872,7 +1872,7 @@ function getWeatherText(code) {
       btn.addEventListener("click", () => switchTab(btn.dataset.tab));
     });
 
-    const savedTab = localStorage.getItem("activeHomepageTab") || "home";
+    const savedTab = sessionStorage.getItem("activeHomepageTab") || "home";
     switchTab(savedTab, false);
     document.body.classList.add("tabs-ready");
     document.documentElement.classList.remove("tabs-booting");
@@ -1901,5 +1901,6 @@ function getWeatherText(code) {
 <!-- ASSIGNMENT_TAB_SOFT_LOTTE_BG_20260602: added assignment tab and subtle Lotte Giants logo color background -->
 <!-- NO_HOME_LOGO_REFRESH_FIX_20260602: removed Lotte logo overlay and prevented home-tab flash on refresh -->
 <!-- ASSIGNMENT_PLACEHOLDER_REMOVED_20260602: removed default assignment note box only -->
+<!-- START_HOME_NEW_WINDOW_FIX_20260602: session tab restore only; new browser window starts from home -->
 </body>
 </html>

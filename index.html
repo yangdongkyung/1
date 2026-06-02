@@ -894,6 +894,17 @@
       text-align: center;
     }
 
+    .ticket-link-panel {
+      grid-column: 1 / -1;
+    }
+
+    .ticket-link-panel .link-btn {
+      width: 100%;
+      min-height: 54px;
+      text-align: center;
+      margin-top: 12px;
+    }
+
     #tab-baseball img {
       max-width: 100%;
       display: block;
@@ -1614,6 +1625,10 @@
 <a class="link-btn" href="https://www.instagram.com/busanlottegiants/" rel="noopener" target="_blank">인스타그램</a>
 </div>
 </section>
+<section class="baseball-link-panel ticket-link-panel">
+<h3>예매</h3>
+<a class="link-btn" href="https://www.giantsclub.com/html/?pcode=378" rel="noopener" target="_blank">예매</a>
+</section>
 </div>
 </section>
 </main>
@@ -1804,5 +1819,6 @@ function getWeatherText(code) {
 <!-- REFRESH_FLASH_FIX_20260602: saved tab applied before page reveal -->
 <!-- KBO_BUTTONS_FIX_20260602: schedule-rank-record-transfer buttons only -->
 <!-- LOTTE_BUTTONS_FIX_20260602: youtube-instagram buttons only -->
+<!-- TICKET_PANEL_FIX_20260602: added independent ticket panel below KBO and Lotte -->
 </body>
 </html>
